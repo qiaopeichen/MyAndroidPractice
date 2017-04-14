@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<weather>
+        <channel id ='1'>
+		     <city>北京</city>
+			 <temp>25°</temp>
+			 <wind>3</wind>
+			 <pm250>300</pm250>
+			 
+		</channel>
+		
+		 <channel id ='2'>
+		     <city>郑州</city>
+			 <temp>20°</temp>
+			 <wind>4</wind>
+			 <pm250>300</pm250>
+			 
+		</channel>
+		
+		<channel id ='3'>
+		     <city>长春</city>
+			 <temp>10°</temp>
+			 <wind>4</wind>
+			 <pm250>100</pm250>
+			 
+		</channel>
+		
+		<channel id ='4'>
+		     <city>沈阳</city>
+			 <temp>20°</temp>
+			 <wind>1</wind>
+			 <pm250>50</pm250>
+		</channel>
+
+
+</weather>
