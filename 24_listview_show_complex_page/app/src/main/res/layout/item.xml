@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="谢霆锋王菲旧情复燃  阿济格垃圾管理阿国际垃圾了高科技爱干净狼藉啊估计了"
+        android:textColor="#000000"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_toRightOf="@id/iv_icon"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="谢霆锋王菲旧情复燃  阿济格垃圾管理阿国际垃圾了高科技爱干净狼藉啊估计了"
+        android:textColor="#999999"
+        android:textSize="15sp"/>
+
+</RelativeLayout>
