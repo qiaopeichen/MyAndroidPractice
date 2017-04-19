@@ -44,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
         et_path = (EditText) findViewById(R.id.et_path);
         iv = (ImageView) findViewById(R.id.iv);
 
-        StrictMode.setThreadPolicy(new
-                StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
-        StrictMode.setVmPolicy(
-                new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
+//        StrictMode.setThreadPolicy(new
+//                StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+//        StrictMode.setVmPolicy(
+//                new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
     }
 
     //2 点击按钮进行查看 指定路径的源码
