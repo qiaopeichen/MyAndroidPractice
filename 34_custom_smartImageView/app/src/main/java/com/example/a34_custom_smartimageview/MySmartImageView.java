@@ -21,10 +21,12 @@ import java.net.URLConnection;
 public class MySmartImageView extends android.support.v7.widget.AppCompatImageView{
 
     private Handler handler = new Handler(){
-        public void handlerMessage(Message msg) {
+        public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1://代表请求成功
                     Bitmap bitmap = (Bitmap) msg.obj;
+                    //显示数据
+                    MySmartImageView.this.setImageBitmap(bitmap);
                     break;
                 case 2://请求失败 显示一个默认图片
                     int resource = (int) msg.obj;
@@ -59,7 +61,7 @@ public class MySmartImageView extends android.support.v7.widget.AppCompatImageVi
     }
 
     // 显示图片的方法 path 是传过来的url地址
-    public void setImageUrl(final String path) {
+    public void setImageUrl(final String path, final int resource) {
         new Thread() {
             public void run() {
                 try {
@@ -86,12 +88,19 @@ public class MySmartImageView extends android.support.v7.widget.AppCompatImageVi
                         handler.sendMessage(msg); // 发送消息
                     } else {
                         //请求失败
-                        Message message = Message.obtain();
+                        Message msg = Message.obtain();
+                        msg.what = 2;
+                        msg.obj = resource;
+                        handler.sendMessage(msg); // 发送消息
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Message msg = Message.obtain();
+                    msg.what = 3;
+                    msg.obj = resource;
+                    handler.sendMessage(msg); // 发送消息
                 }
             }
-        }
+        }.start();
     }
 }
