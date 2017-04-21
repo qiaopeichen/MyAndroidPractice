@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.a38_multi_threaded_breakpoint_download.MainActivity">
+
+    <EditText
+        android:id="@+id/et_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://192.168.1.116/frog.mp4"
+        android:hint="请输入下载路径"/>
+
+    <EditText
+        android:id="@+id/te_threadCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/ll_pb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
+</LinearLayout>
