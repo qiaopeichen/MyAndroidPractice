@@ -11,18 +11,19 @@
         android:id="@+id/et_path"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="http://192.168.1.116/frog.mp4"
+        android:text="http://192.168.43.144/npp.exe"
         android:hint="请输入下载路径"/>
 
     <EditText
-        android:id="@+id/te_threadCount"
+        android:id="@+id/et_threadCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:onClick="click"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
         android:id="@+id/ll_pb"
