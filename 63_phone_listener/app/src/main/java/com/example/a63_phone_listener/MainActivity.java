@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: fuckit");
+//        Log.d(TAG, "onCreate: fuckit");
     }
     //点击按钮 开启服务 通过startservice
     public void click1(View v) {

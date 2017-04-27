@@ -21,6 +21,7 @@ public class PhoneService extends Service {
     private MediaRecorder recorder; // 录音机实例
 
     public PhoneService() {
+
     }
 
     @Override
