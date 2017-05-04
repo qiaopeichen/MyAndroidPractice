@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse("content://sms/inbox");
         ContentValues values = new ContentValues();
         values.put("address", "110");
-        values.put("body", "王先生，请您马上来一趟，否则后果自负");
+        values.put("body", "乔先生，请您马上来一趟，否则后果自负");
         values.put("date", System.currentTimeMillis());
         getContentResolver().insert(uri, values);
 

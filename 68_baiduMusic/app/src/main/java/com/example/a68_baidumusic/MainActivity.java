@@ -3,15 +3,33 @@ package com.example.a68_baidumusic;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
     private Iservice iservice; // 这个是我们定义的中间人对象
     private MyConn conn;
+    private static SeekBar sbar;
+
+    public static Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // 获取我们携带的数据
+            Bundle data = msg.getData();
+            // 获取歌曲的总时长和当前进度
+            int duration = data.getInt("duration");
+            int currentPosition = data.getInt("currentPosition");
+            // 设置seekBar的进度
+            sbar.setMax(duration);
+            sbar.setProgress(currentPosition);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +43,26 @@ public class MainActivity extends AppCompatActivity {
         //2 调用bingService 目的是为了获取我们定义的中间人对象 就可以间接的调用服务里面的方法了
         conn = new MyConn();
         bindService(intent, conn, BIND_AUTO_CREATE);
+        //3 找到seekBar 设置进度
+        sbar = (SeekBar) findViewById(R.id.seekBar1);
+        //4 给seekBar设置监听事件
+        sbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+           // 当进度改变的时候调用
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+            // 开始拖动的时候调用
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+            // 停止拖动的时候调用
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                iservice.callSeekTo(seekBar.getProgress());
+            }
+        });
     }
 
     @Override
