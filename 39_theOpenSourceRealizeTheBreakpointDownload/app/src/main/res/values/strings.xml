@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">39_theOpenSourceRealizeTheBreakpointDownload</string>
-    <string name="et_path_text">http://192.168.43.144/Judy.mov</string>
-    <string name="et_path_hint">请输入下载路径</string>
-    <string name="bt_text">下载</string>
-</resources>

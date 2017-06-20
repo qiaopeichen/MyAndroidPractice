@@ -1,2 +1,0 @@
-include ':app'
-include ':App',':VitamioBundle-5.0.2'
