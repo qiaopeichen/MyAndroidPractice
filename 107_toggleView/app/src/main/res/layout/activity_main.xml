@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:itheima="http://schemas.android.com/apk/res/com.example.a107_toggleview"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a107_toggleview.MainActivity">
+
+    <com.example.a107_toggleview.ui.ToggleView
+        android:id="@+id/toggleView"
+        android:layout_centerInParent="true"
+        itheima:switch_background="@drawable/switch_background"
+        itheima:slide_button="@drawable/slide_button"
+        itheima:switch_state="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
