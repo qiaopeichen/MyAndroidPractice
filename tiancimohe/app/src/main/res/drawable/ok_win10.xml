@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_1" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_2" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_3" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_4" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_5" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_6" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_7" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_8" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_9" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_10" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_11" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_12" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_13" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_14" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_15" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_16" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_17" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_18" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_19" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_20" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_21" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_22" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_23" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_24" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_25" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_26" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_27" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_28" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_29" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_30" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_31" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_32" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_33" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_34" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_35" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_36" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_37" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_38" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_39" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_40" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_41" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_42" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_43" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_44" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_45" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_46" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_47" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_48" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_49" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_50" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_51" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_52" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_53" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_54" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_55" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_56" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_57" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_58" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_59" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_60" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_61" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_62" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_63" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_64" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_65" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_66" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_67" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_68" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_69" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_70" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_71" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_72" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_73" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="50">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_74" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="100">
+        <clip android:gravity="left" android:drawable="@drawable/ok_win10_75" android:clipOrientation="horizontal" />
+    </item>
+</animation-list>

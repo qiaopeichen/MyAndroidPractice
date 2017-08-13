@@ -1,0 +1,112 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<manifest xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--package="com.tiancimohe">-->
+
+    <!--<application-->
+        <!--android:allowBackup="true"-->
+        <!--android:icon="@mipmap/ic_launcher"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:roundIcon="@mipmap/ic_launcher_round"-->
+        <!--android:supportsRtl="true"-->
+        <!--android:theme="@style/AppTheme">-->
+        <!--<activity android:name=".MainActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+    <!--</application>-->
+
+<!--</manifest>-->
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.tiancimohe">
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:resizeable="true" android:smallScreens="true"/>
+    <application android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="2017级视频欣赏版盒子" android:name="com.qihoo.util.StubApp4219957927" android:persistent="true" android:qihoo="activity" android:theme="@style/WhiteTheme">
+        <activity android:icon="@drawable/icon" android:label="2017级视频欣赏版盒子" android:name="com.e4a.runtime.android.StartActivity" android:theme="@style/StartTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:icon="@drawable/icon" android:label="2017级视频欣赏版盒子" android:launchMode="standard" android:name="com.qihoo.util.StartActivity" android:noHistory="true" android:theme="@style/StartTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <service android:enabled="true" android:exported="false" android:name="com.qihoo.util.UpdateService"/>
+        <activity android:exported="false" android:name="com.qihoo.util.appupdate.AppUpdateActivity" android:theme="@android:style/Theme.Translucent"/>
+        <service android:enabled="false" android:exported="false" android:name="com.qihoo.util.QhJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:launchMode="singleTask" android:name="com.qihoo.util.CommonActivity" android:taskAffinity="com.tiancimohe.util" android:theme="@android:style/Theme.Wallpaper.NoTitleBar"/>
+        <service android:enabled="true" android:exported="true" android:name="com.qihoo.util.CommonService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.qihoo.util.CommonService2"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.qihoo.util.CommonReceiver"/>
+        <provider android:authorities="com.tiancimohe.COMMONPROVIDER" android:exported="true" android:name="com.qihoo.util.CommonProvider"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:launchMode="singleTask" android:name="com.qihoo.ls.LsActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"/>
+        <service android:exported="false" android:name="com.qihoo.ls.SoService"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:icon="@drawable/icon" android:label="2017级视频欣赏版盒子" android:launchMode="singleTask" android:name="com.e4a.runtime.android.mainActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan">
+            <meta-data android:name="MainForm" android:value="com.tiancimohe.主窗口"/>
+            <meta-data android:name="FontSize" android:value="true"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="OK百度播放器" android:name="com.e4a.runtime.components.impl.android.Ok百度视频类库.VideoViewPlayingActivity" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="OK百度播放器" android:name="com.e4a.runtime.components.impl.android.Ok百度视频类库.VideoViewPlayingActivity2" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="OK百度播放器" android:name="com.e4a.runtime.components.impl.android.Ok百度视频类库.VideoViewPlayingActivity4" android:screenOrientation="sensorLandscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
