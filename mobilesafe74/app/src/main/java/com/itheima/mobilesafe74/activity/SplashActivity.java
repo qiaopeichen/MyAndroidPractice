@@ -1,20 +1,23 @@
 package com.itheima.mobilesafe74.activity;
 
-import android.app.Application;
-import android.app.DownloadManager;
-import android.app.ProgressDialog;
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
+import android.webkit.MimeTypeMap;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +30,6 @@ import com.itheima.mobilesafe74.utils.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.HttpManager;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -94,6 +96,40 @@ public class SplashActivity extends AppCompatActivity {
         initUI();
         // 初始化数据的方法
         initData();
+        // 初始化动画，动画执行方法，淡入淡出
+        initAnimation();
+        boolean has_short_cut = PrefUtils.getBoolean(this, ConstantValue.HAS_SHORT_CUT, false);
+        if (!has_short_cut) {
+            // 是否生成快捷键的方法
+            initShortCut();
+        }
+    }
+
+    private void initShortCut() {
+        // 快捷方式只生成一个
+        // 图片
+        // 文字
+        // 点击此快捷方式开启的意图
+
+        // 生成快捷方式，其实就是去发送一条广播，上述的内容，都可以封装到广播的Intent中，权限
+        Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        // 第二个参数，将资源文件中的一张图片转换成Bitmap，作为数据在发送广播的过程中传递出去
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, R.mipmap.ic_launcher);
+        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "手机卫士");
+
+        // 点开快捷方式的意图
+        Intent shortCutIntent = new Intent();
+        shortCutIntent.setAction("com.itheima.mobilesafe74");
+        shortCutIntent.addCategory("android.intent.category.DEFAULT");
+        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortCutIntent);
+        sendBroadcast(intent);
+        PrefUtils.putBoolean(this, ConstantValue.HAS_SHORT_CUT, true);
+    }
+
+    private void initAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(3000);
+        rl_root.startAnimation(alphaAnimation);
     }
 
     private void showUpdateDialog() {
@@ -123,6 +159,7 @@ public class SplashActivity extends AppCompatActivity {
                 enterHome();
             }
         });
+        builder.show();
     }
 
     private void enterHome() {
@@ -133,12 +170,25 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void downloadApk() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            int REQUEST_CODE_CONTACT = 105;
+            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            //验证是否许可权限
+            for (String str : permissions) {
+                if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED) {
+                    //申请权限
+                    this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
+                    return;
+                }
+            }
+        }
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             final String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath()
                     + File.separator + "mobilesafe69.apk";
             RequestParams params = new RequestParams(mDownloadUrl);
+            Log.d(TAG, "downloadApk: " + mDownloadUrl);
             params.setAutoRename(true);//断点下载
-            params.setSaveFilePath("sdPath");
+            params.setSaveFilePath(sdPath);
             x.http().get(params, new Callback.ProgressCallback<File>() {
                 @Override
                 public void onCancelled(CancelledException arg0) {
@@ -158,7 +208,7 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(File arg0) {
                     // TODO Auto-generated method stub
-                    Log.d(TAG, "onSuccess: 下载成功");
+                    Log.d(TAG, "onSuccess: 下载成功" + arg0);
                     installApk(arg0);
 
                 }
@@ -172,13 +222,13 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onStarted() {
                     // TODO Auto-generated method stub
-                    System.out.println("开始下载");
+                    Log.d(TAG, "onStarted: 开始下载");
                 }
 
                 @Override
                 public void onWaiting() {
                     // TODO Auto-generated method stub
-                    Log.d(TAG, "onWaiting: 暂停下载？");
+                    Log.d(TAG, "onWaiting: 等待下载");
                 }
             });
 
@@ -188,13 +238,52 @@ public class SplashActivity extends AppCompatActivity {
 
     private void installApk(File file) {
         // 通过隐式意图去开启activity
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.fromFile(file),
-                "application/vnd.android.package-archive");
-        startActivityForResult(intent, 0);
+        Log.d(TAG, "installApk: ");
+        if (Build.VERSION.SDK_INT < 23) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            // 由于没有在Activity环境下启动Activity,设置下面的标签
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(
+                    file),
+                    "application/vnd.android.package-archive");
+            startActivity(intent);
+        } else {
+            openFile(file, this);
+        }
+
+    }
+    /**安装APK，适配android6.0*/
+    public void openFile(File var0, Context var1) {
+        Intent var2 = new Intent();
+        var2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        var2.setAction(Intent.ACTION_VIEW);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+            Uri uriForFile = FileProvider.getUriForFile(var1, var1.getApplicationContext().getPackageName() + ".provider", var0);
+            var2.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            var2.setDataAndType(uriForFile, var1.getContentResolver().getType(uriForFile));
+        }else{
+            var2.setDataAndType(Uri.fromFile(var0), getMIMEType(var0));
+        }
+        try {
+            var1.startActivity(var2);
+        } catch (Exception var5) {
+            var5.printStackTrace();
+            Toast.makeText(var1, "没有找到打开此类文件的程序", Toast.LENGTH_SHORT).show();
+        }
     }
 
+    public String getMIMEType(File var0) {
+        String var1 = "";
+        String var2 = var0.getName();
+        String var3 = var2.substring(var2.lastIndexOf(".") + 1, var2.length()).toLowerCase();
+        var1 = MimeTypeMap.getSingleton().getMimeTypeFromExtension(var3);
+        return var1;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void initData() {
 
@@ -216,7 +305,7 @@ public class SplashActivity extends AppCompatActivity {
                 key:value
             }
          */
-        boolean is_Update = PrefUtils.getBoolean(this, ConstantValue.UPDATE_VERSION, false);
+        boolean is_Update = PrefUtils.getBoolean(this, ConstantValue.UPDATE_VERSION, true);
         if (is_Update) {
             checkVersion();
         } else {
@@ -239,8 +328,8 @@ public class SplashActivity extends AppCompatActivity {
                 Message msg = Message.obtain();
                 long startTime = System.currentTimeMillis();
                 try {
-                    // 1. 获取访问网络Url地址， http://10.0.2.2:8080/update69.json
-                    URL url = new URL("http://10.0.2.2:8080/update69.json");
+                    // 1. 获取访问网络Url地址， http://10.0.2.2/update69.json
+                    URL url = new URL("http://10.0.2.2/update69.json");
                     // 2.在此url地址上去开启一个连接请求
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     // 3.请求的配置信息
@@ -284,7 +373,7 @@ public class SplashActivity extends AppCompatActivity {
                     msg.what = JSON_ERROR;
                 } finally {
                     long endTime = System.currentTimeMillis();
-                    if (endTime - startTime < 3000) {
+                    if (endTime - startTime < 4000) {
                         // 睡眠3秒
                         try {
                             Thread.sleep(4000 - (endTime - startTime));

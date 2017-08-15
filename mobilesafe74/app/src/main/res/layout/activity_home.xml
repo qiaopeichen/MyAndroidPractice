@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itheima.mobilesafe74.activity.HomeActivity">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="homeActivity"/>
-</android.support.constraint.ConstraintLayout>
+    tools:context="com.itheima.mobilesafe74.activity.HomeActivity"
+    android:orientation="vertical">
+    <!--将对应属性抽取到样式中去-->
+    <TextView
+        style="@style/TitleStyle"
+        android:text="功能列表" />
+    <!--android:ellipsize="end"添加省略点所在位置-->
+    <!--想让文字出现跑马灯效果，必须让其获取焦点-->
+    <!--android:marqueeRepeatLimit="marquee_forever"一直滚动属性-->
+    <!--自定义控件达到滚动效果（其实就是重写原有的TextView，让其一直能够获取焦点即可）-->
+    <com.itheima.mobilesafe74.view.FocusTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:padding="5dp"
+        android:maxLines="1"
+        android:text="测试版本跑马灯测试版本跑马灯测试版本跑马灯测试版本跑马灯测试版本跑马灯测试版本跑马灯测试版本跑马灯"
+        android:textColor="#000"/>
+
+<GridView
+    android:id="@+id/gv_home"
+    android:numColumns="3"
+    android:verticalSpacing="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+</GridView>
+</LinearLayout>
