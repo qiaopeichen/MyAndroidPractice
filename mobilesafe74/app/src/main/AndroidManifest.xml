@@ -13,6 +13,7 @@
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <!-- 查询快捷方式 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".global.MyApplication"
@@ -57,7 +58,8 @@
         <activity android:name=".activity.SetupOverActivity" />
         <activity android:name=".activity.Setup1Activity" />
         <activity android:name=".activity.Setup2Activity" />
-        <activity android:name=".activity.Setup3Activity"></activity>
+        <activity android:name=".activity.Setup3Activity" />
+        <activity android:name=".activity.ContactListActivity"></activity>
     </application>
 
 </manifest>

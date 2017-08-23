@@ -1,7 +1,13 @@
 package com.itheima.mobilesafe74.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -15,6 +21,8 @@ import com.itheima.mobilesafe74.utils.ToastUtil;
 import com.itheima.mobilesafe74.view.SettingItemView;
 
 public class Setup2Activity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +45,26 @@ public class Setup2Activity extends AppCompatActivity {
         siv_sim_bound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 动态获取运行时权限
+                if (Build.VERSION.SDK_INT >= 23) {
+                    int REQUEST_CODE_CONTACT = 101;
+                    String[] permissions = {Manifest.permission.READ_PHONE_STATE};
+                    //验证是否许可权限
+                    for (String str : permissions) {
+                        if (ContextCompat.checkSelfPermission(Setup2Activity.this, str) != PackageManager.PERMISSION_GRANTED) {
+                            //申请权限
+                            ActivityCompat.requestPermissions(Setup2Activity.this, permissions, REQUEST_CODE_CONTACT);
+                            return;
+                        }
+                    }
+                }
+
                 // 3.获取原有的状态
                 boolean isCheak = siv_sim_bound.isCheck();
                 // 4.将原有状态取反
                 // 5.状态设置给当前条目
                 siv_sim_bound.setCheck(!isCheak);
-                if (!isCheak) {
+                if (!isCheak) { //if(true)走此方法，if(false)走else方法
                     // 6.存储（序列卡号）
                     // 6.1 获取sim卡序列号TelephoneManager
                     TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -50,7 +72,9 @@ public class Setup2Activity extends AppCompatActivity {
                     String simSerialNumber = manager.getSimSerialNumber();
                     // 6.3 存储
                     SpUtil.putString(getApplicationContext(), ConstantValue.SIM_NUMBER, simSerialNumber);
-
+                } else {
+                    // 7.将存储序列卡号的节点，从sp中删除掉
+                    SpUtil.remove(getApplicationContext(), ConstantValue.SIM_NUMBER);
                 }
             }
         });
