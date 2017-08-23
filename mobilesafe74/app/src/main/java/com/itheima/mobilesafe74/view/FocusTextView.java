@@ -26,6 +26,9 @@ public class FocusTextView extends android.support.v7.widget.AppCompatTextView{
 
     // 重写获取焦点的方法，由系统调用，调用的时候默认就能获取焦点
 
+
+
+
     @Override
     public boolean isFocused() {
         return true;

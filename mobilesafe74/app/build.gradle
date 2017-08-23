@@ -8,7 +8,7 @@ android {
         useNewCruncher = false
     }
     defaultConfig {
-        applicationId "com.example.mobilesafe74"
+        applicationId "com.itheima.mobilesafe74"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1

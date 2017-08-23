@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
  * Created by Administrator on 2017/8/12.
  */
 
-public class PrefUtils {
+public class SpUtil {
     private static SharedPreferences sp;
 
     // 1. 存储boolean变量方法

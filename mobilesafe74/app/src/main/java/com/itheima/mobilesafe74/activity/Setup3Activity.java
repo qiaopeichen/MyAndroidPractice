@@ -3,13 +3,13 @@ package com.itheima.mobilesafe74.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.mobilesafe74.R;
+import com.itheima.mobilesafe74.R;
 
-public class MobileSafeActivity extends AppCompatActivity {
+public class Setup3Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mobile_safe);
+        setContentView(R.layout.activity_setup3);
     }
 }

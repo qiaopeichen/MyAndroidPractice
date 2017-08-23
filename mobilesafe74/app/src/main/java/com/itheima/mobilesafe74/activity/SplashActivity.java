@@ -22,9 +22,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mobilesafe74.R;
+import com.itheima.mobilesafe74.R;
 import com.itheima.mobilesafe74.utils.ConstantValue;
-import com.itheima.mobilesafe74.utils.PrefUtils;
+import com.itheima.mobilesafe74.utils.SpUtil;
 import com.itheima.mobilesafe74.utils.StreamUtil;
 import com.itheima.mobilesafe74.utils.ToastUtil;
 
@@ -98,7 +98,7 @@ public class SplashActivity extends AppCompatActivity {
         initData();
         // 初始化动画，动画执行方法，淡入淡出
         initAnimation();
-        boolean has_short_cut = PrefUtils.getBoolean(this, ConstantValue.HAS_SHORT_CUT, false);
+        boolean has_short_cut = SpUtil.getBoolean(this, ConstantValue.HAS_SHORT_CUT, false);
         if (!has_short_cut) {
             // 是否生成快捷键的方法
             initShortCut();
@@ -123,7 +123,7 @@ public class SplashActivity extends AppCompatActivity {
         shortCutIntent.addCategory("android.intent.category.DEFAULT");
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortCutIntent);
         sendBroadcast(intent);
-        PrefUtils.putBoolean(this, ConstantValue.HAS_SHORT_CUT, true);
+        SpUtil.putBoolean(this, ConstantValue.HAS_SHORT_CUT, true);
     }
 
     private void initAnimation() {
@@ -305,7 +305,7 @@ public class SplashActivity extends AppCompatActivity {
                 key:value
             }
          */
-        boolean is_Update = PrefUtils.getBoolean(this, ConstantValue.UPDATE_VERSION, true);
+        boolean is_Update = SpUtil.getBoolean(this, ConstantValue.UPDATE_VERSION, true);
         if (is_Update) {
             checkVersion();
         } else {

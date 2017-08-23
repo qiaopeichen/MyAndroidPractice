@@ -1,6 +1,5 @@
 package com.itheima.mobilesafe74.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,13 +17,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mobilesafe74.R;
+import com.itheima.mobilesafe74.R;
 import com.itheima.mobilesafe74.utils.ConstantValue;
 import com.itheima.mobilesafe74.utils.Md5Util;
-import com.itheima.mobilesafe74.utils.PrefUtils;
+import com.itheima.mobilesafe74.utils.SpUtil;
 import com.itheima.mobilesafe74.utils.ToastUtil;
-
-import org.xutils.common.util.MD5;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -64,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), BlackNumberActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(getApplicationContext(), AppManagerActivity.class));
+//                        startActivity(new Intent(getApplicationContext(), AppManagerActivity.class));
                         break;
                     case 3:
                         startActivity(new Intent(getApplicationContext(), ProgressManagerActivity.class));
@@ -90,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void showDialog() {
-        String psd = PrefUtils.getString(this, ConstantValue.SET_PSD, "");
+        String psd = SpUtil.getString(this, ConstantValue.SET_PSD, "");
         if (TextUtils.isEmpty(psd)) {
             // 1.初次进入设置密码对话框
             showSetPsdDialog();
@@ -119,13 +116,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String confirmPsd = Md5Util.encoder(et_confirm_psd.getText().toString().trim());
-                String spPsd = PrefUtils.getString(getApplicationContext(), ConstantValue.SET_PSD, "");
+                String spPsd = SpUtil.getString(getApplicationContext(), ConstantValue.SET_PSD, "");
                 if (!TextUtils.isEmpty(confirmPsd)) {
                     if (spPsd.equals(confirmPsd)) {
                         // 当前的对话框隐藏
                         dialog.dismiss();
                         // 跳转到新的activity界面
-                        startActivity(new Intent(getApplicationContext(), MobileSafeActivity.class));
+                        startActivity(new Intent(getApplicationContext(), SetupOverActivity.class));
                     } else {
                         ToastUtil.show(getApplicationContext(), "两次密码输入不一致，请重新输入");
                     }
@@ -172,11 +169,11 @@ public class HomeActivity extends AppCompatActivity {
                     if (psd.equals(confirmPsd)) {
                         //将确认正确的密码存储
 
-                        PrefUtils.putString(getApplicationContext(), ConstantValue.SET_PSD, Md5Util.encoder(psd));
+                        SpUtil.putString(getApplicationContext(), ConstantValue.SET_PSD, Md5Util.encoder(psd));
                         // 当前的对话框隐藏
                         dialog.dismiss();
                         // 跳转到新的activity界面
-                        startActivity(new Intent(getApplicationContext(), MobileSafeActivity.class));
+                        startActivity(new Intent(getApplicationContext(), SetupOverActivity.class));
                     } else {
                         ToastUtil.show(getApplicationContext(), "两次密码输入不一致，请重新输入");
                     }

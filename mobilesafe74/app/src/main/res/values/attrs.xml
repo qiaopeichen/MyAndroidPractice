@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="com.itheima.mobilesafe74.view.SettingItemView">
+        <attr name="destitle" format="string" />
+        <attr name="deson" format="string" />
+        <attr name="desoff" format="string" />
+    </declare-styleable>
+
+</resources>
