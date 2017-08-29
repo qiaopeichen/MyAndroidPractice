@@ -43,6 +43,23 @@ public class SpUtil {
         return sp.getString(key, defValue);
     }
 
+    // 3. 存储int变量方法
+    public static void putInt(Context ctx, String key, int value) {
+        // name 存储文件名称
+        if (sp == null) {
+            sp = ctx.getSharedPreferences("config", Context.MODE_PRIVATE);
+        }
+        sp.edit().putInt(key, value).commit();
+    }
+    // 4. 读取int变量方法
+    public static int getInt(Context ctx, String key, int defValue) {
+        // name 存储文件名称
+        if (sp == null) {
+            sp = ctx.getSharedPreferences("config", Context.MODE_PRIVATE);
+        }
+        return sp.getInt(key, defValue);
+    }
+
     public static void remove(Context ctx, String key) {
         if (sp == null) {
             sp = ctx.getSharedPreferences("config", Context.MODE_PRIVATE);

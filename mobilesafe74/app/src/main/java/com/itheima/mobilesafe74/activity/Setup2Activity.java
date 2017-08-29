@@ -4,10 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -19,6 +16,7 @@ import com.itheima.mobilesafe74.utils.ConstantValue;
 import com.itheima.mobilesafe74.utils.SpUtil;
 import com.itheima.mobilesafe74.utils.ToastUtil;
 import com.itheima.mobilesafe74.view.SettingItemView;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 public class Setup2Activity extends AppCompatActivity {
 
@@ -28,9 +26,10 @@ public class Setup2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup2);
-
         initUI();
     }
+
+
 
     private void initUI() {
         final SettingItemView siv_sim_bound = (SettingItemView) findViewById(R.id.siv_sim_bound);
@@ -46,37 +45,37 @@ public class Setup2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 动态获取运行时权限
-                if (Build.VERSION.SDK_INT >= 23) {
-                    int REQUEST_CODE_CONTACT = 101;
-                    String[] permissions = {Manifest.permission.READ_PHONE_STATE};
-                    //验证是否许可权限
-                    for (String str : permissions) {
-                        if (ContextCompat.checkSelfPermission(Setup2Activity.this, str) != PackageManager.PERMISSION_GRANTED) {
-                            //申请权限
-                            ActivityCompat.requestPermissions(Setup2Activity.this, permissions, REQUEST_CODE_CONTACT);
-                            return;
-                        }
-                    }
+                RxPermissions rxPermissions = new RxPermissions(Setup2Activity.this); // where this is an Activity instance
+                rxPermissions
+                        .request(Manifest.permission.READ_PHONE_STATE)
+                        .subscribe(granted -> {
+                            if (granted) { // Always true pre-M
+                                // I can control the camera now
+                                // 3.获取原有的状态
+                                boolean isCheak = siv_sim_bound.isCheck();
+                                // 4.将原有状态取反
+                                // 5.状态设置给当前条目
+                                siv_sim_bound.setCheck(!isCheak);
+                                if (!isCheak) { //if(true)走此方法，if(false)走else方法
+                                    // 6.存储（序列卡号）
+                                    // 6.1 获取sim卡序列号TelephoneManager
+                                    TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                                    // 6.2 获取sim卡的序列卡号
+                                    String simSerialNumber = manager.getSimSerialNumber();
+                                    // 6.3 存储
+                                    SpUtil.putString(getApplicationContext(), ConstantValue.SIM_NUMBER, simSerialNumber);
+                                } else {
+                                    // 7.将存储序列卡号的节点，从sp中删除掉
+                                    SpUtil.remove(getApplicationContext(), ConstantValue.SIM_NUMBER);
+                                }
+                            } else {
+                                // Oups permission denied
+                                ToastUtil.show(getApplicationContext(),"未获取到相应权限");
+                            }
+                        });
+
                 }
 
-                // 3.获取原有的状态
-                boolean isCheak = siv_sim_bound.isCheck();
-                // 4.将原有状态取反
-                // 5.状态设置给当前条目
-                siv_sim_bound.setCheck(!isCheak);
-                if (!isCheak) { //if(true)走此方法，if(false)走else方法
-                    // 6.存储（序列卡号）
-                    // 6.1 获取sim卡序列号TelephoneManager
-                    TelephonyManager manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                    // 6.2 获取sim卡的序列卡号
-                    String simSerialNumber = manager.getSimSerialNumber();
-                    // 6.3 存储
-                    SpUtil.putString(getApplicationContext(), ConstantValue.SIM_NUMBER, simSerialNumber);
-                } else {
-                    // 7.将存储序列卡号的节点，从sp中删除掉
-                    SpUtil.remove(getApplicationContext(), ConstantValue.SIM_NUMBER);
-                }
-            }
         });
     }
 

@@ -4,14 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.itheima.mobilesafe74.activity.SettingActivity">
 
-    <com.itheima.mobilesafe74.view.SettingItemView
-        xmlns:mobilesafe="http://schemas.android.com/apk/res-auto"
+    <com.itheima.mobilesafe74.view.SettingItemView xmlns:mobilesafe="http://schemas.android.com/apk/res-auto"
         android:id="@+id/siv_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         mobilesafe:desoff="自动更新已关闭"
         mobilesafe:deson="自动更新已开启"
         mobilesafe:destitle="自动更新设置" />
+
+    <com.itheima.mobilesafe74.view.SettingItemView xmlns:mobilesafe="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/siv_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:desoff="电话归属地显示已关闭"
+        mobilesafe:deson="电话归属地显示已开启"
+        mobilesafe:destitle="电话归属地显示设置" />
+
+    <com.itheima.mobilesafe74.view.SettingClickView
+        android:id="@+id/scv_toast_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.itheima.mobilesafe74.view.SettingClickView
+        android:id="@+id/scv_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

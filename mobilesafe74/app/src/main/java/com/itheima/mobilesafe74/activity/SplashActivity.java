@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import com.itheima.mobilesafe74.utils.ConstantValue;
 import com.itheima.mobilesafe74.utils.SpUtil;
 import com.itheima.mobilesafe74.utils.StreamUtil;
 import com.itheima.mobilesafe74.utils.ToastUtil;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +38,7 @@ import org.xutils.x;
 
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -98,10 +101,56 @@ public class SplashActivity extends AppCompatActivity {
         initData();
         // 初始化动画，动画执行方法，淡入淡出
         initAnimation();
+        //  初始化数据库
+        initDB();
+
         boolean has_short_cut = SpUtil.getBoolean(this, ConstantValue.HAS_SHORT_CUT, false);
         if (!has_short_cut) {
             // 是否生成快捷键的方法
             initShortCut();
+        }
+    }
+
+    private void initDB() {
+        //1.归属地数据拷贝过程
+        initAddressDB("address.db");
+    }
+
+    /**
+     * 拷贝数据库至files文件夹下
+     * @param dbName 数据库名称
+     */
+    private void initAddressDB(String dbName) {
+        //1.在files文件夹下创建名为dbName数据库文件过程
+        File files = getFilesDir();
+        File file = new File(files, dbName);
+        if (file.exists()) {
+            return;
+        }
+        InputStream stream = null;
+        FileOutputStream fos = null;
+        //2.输入流读取第三方资产目录下的文件
+        try {
+            stream = getAssets().open(dbName);
+            //3.将读取到内容写入到指定文件夹的文件中去
+            fos = new FileOutputStream(file);
+            //4.每次的读取内容大小
+            byte[] bs = new byte[1024];
+            int temp = -1;
+            while((temp = stream.read(bs))!= -1) {
+                fos.write(bs, 0, temp);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (stream != null && fos != null) {
+                try{
+                    stream.close();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -170,69 +219,71 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void downloadApk() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            int REQUEST_CODE_CONTACT = 105;
-            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            //验证是否许可权限
-            for (String str : permissions) {
-                if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED) {
-                    //申请权限
-                    this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
-                    return;
-                }
-            }
-        }
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            final String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + File.separator + "mobilesafe69.apk";
-            RequestParams params = new RequestParams(mDownloadUrl);
-            Log.d(TAG, "downloadApk: " + mDownloadUrl);
-            params.setAutoRename(true);//断点下载
-            params.setSaveFilePath(sdPath);
-            x.http().get(params, new Callback.ProgressCallback<File>() {
-                @Override
-                public void onCancelled(CancelledException arg0) {
-                    Log.d(TAG, "onCancelled: 下载取消");
-                }
+        RxPermissions rxPermissions = new RxPermissions(this);
+        // 动态获取运行时权限
+        rxPermissions
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) { // Always true pre-M
+                        // I can control the camera now
+                        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                            final String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                                    + File.separator + "mobilesafe69.apk";
+                            RequestParams params = new RequestParams(mDownloadUrl);
+                            Log.d(TAG, "downloadApk: " + mDownloadUrl);
+                            params.setAutoRename(true);//断点下载
+                            params.setSaveFilePath(sdPath);
+                            x.http().get(params, new Callback.ProgressCallback<File>() {
+                                @Override
+                                public void onCancelled(CancelledException arg0) {
+                                    Log.d(TAG, "onCancelled: 下载取消");
+                                }
 
-                @Override
-                public void onFinished() {
-                    Log.d(TAG, "onFinished: 下载完成");
-                }
+                                @Override
+                                public void onFinished() {
+                                    Log.d(TAG, "onFinished: 下载完成");
+                                }
 
-                @Override
-                public void onError(Throwable arg0, boolean arg1) {
-                    Log.d(TAG, "onError: 下载错误");
-                }
+                                @Override
+                                public void onError(Throwable arg0, boolean arg1) {
+                                    Log.d(TAG, "onError: 下载错误");
+                                }
 
-                @Override
-                public void onSuccess(File arg0) {
-                    // TODO Auto-generated method stub
-                    Log.d(TAG, "onSuccess: 下载成功" + arg0);
-                    installApk(arg0);
+                                @Override
+                                public void onSuccess(File arg0) {
+                                    // TODO Auto-generated method stub
+                                    Log.d(TAG, "onSuccess: 下载成功" + arg0);
+                                    installApk(arg0);
 
-                }
+                                }
 
-                @Override
-                public void onLoading(long arg0, long arg1, boolean arg2) {
-                    // TODO Auto-generated method stub
-                    Log.d(TAG, "onLoading: 正在下载");
-                }
+                                @Override
+                                public void onLoading(long arg0, long arg1, boolean arg2) {
+                                    // TODO Auto-generated method stub
+                                    Log.d(TAG, "onLoading: 正在下载");
+                                }
 
-                @Override
-                public void onStarted() {
-                    // TODO Auto-generated method stub
-                    Log.d(TAG, "onStarted: 开始下载");
-                }
+                                @Override
+                                public void onStarted() {
+                                    // TODO Auto-generated method stub
+                                    Log.d(TAG, "onStarted: 开始下载");
+                                }
 
-                @Override
-                public void onWaiting() {
-                    // TODO Auto-generated method stub
-                    Log.d(TAG, "onWaiting: 等待下载");
-                }
-            });
+                                @Override
+                                public void onWaiting() {
+                                    // TODO Auto-generated method stub
+                                    Log.d(TAG, "onWaiting: 等待下载");
+                                }
+                            });
 
-        }
+                        }
+                    } else {
+                        // Oups permission denied
+                        ToastUtil.show(getApplicationContext(), "未得到相应权限");
+                    }
+                });
+
+
 
     }
 
@@ -252,16 +303,19 @@ public class SplashActivity extends AppCompatActivity {
         }
 
     }
-    /**安装APK，适配android6.0*/
+
+    /**
+     * 安装APK，适配android6.0
+     */
     public void openFile(File var0, Context var1) {
         Intent var2 = new Intent();
         var2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         var2.setAction(Intent.ACTION_VIEW);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Uri uriForFile = FileProvider.getUriForFile(var1, var1.getApplicationContext().getPackageName() + ".provider", var0);
             var2.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             var2.setDataAndType(uriForFile, var1.getContentResolver().getType(uriForFile));
-        }else{
+        } else {
             var2.setDataAndType(Uri.fromFile(var0), getMIMEType(var0));
         }
         try {
@@ -424,4 +478,5 @@ public class SplashActivity extends AppCompatActivity {
         }
         return null;
     }
+
 }

@@ -33,5 +33,21 @@ public class ConstantValue {
      * 选择联系人电话号码的key
      */
     public static final String CONTACT_PHONE = "contact_phone";
+    /**
+     * 是否开启防盗保护的key
+     */
+    public static final String OPEN_SECURITY = "open_security";
+    /**
+     * 左上角的x轴的坐标Key
+     */
+    public static final String LOCATION_X = "location_x";
+    /**
+     * 左上角的y轴的坐标Key
+     */
+    public static final String LOCATION_Y = "location_y";
+    /**
+     * 来电显示吐司颜色Key
+     */
+    public static final String TOAST_STYLE = "toast_style";
 }
 

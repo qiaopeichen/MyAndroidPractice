@@ -14,7 +14,7 @@ import com.itheima.mobilesafe74.R;
 
 public class SettingItemView extends RelativeLayout {
 
-    private static final String TAG = "jojo";
+//    private static final String TAG = "jojo";
     private static final String NAMESPACE = "http://schemas.android.com/apk/res-auto";
     private String mDestitle;
     private String mDesoff;
@@ -67,9 +67,9 @@ public class SettingItemView extends RelativeLayout {
         mDesoff = attrs.getAttributeValue(NAMESPACE, "desoff");
         mDeson = attrs.getAttributeValue(NAMESPACE, "deson");
 
-        Log.d(TAG, "initAttrs: " + mDestitle);
-        Log.d(TAG, "initAttrs: " + mDesoff);
-        Log.d(TAG, "initAttrs: " + mDeson);
+//        Log.d(TAG, "initAttrs: " + mDestitle);
+//        Log.d(TAG, "initAttrs: " + mDesoff);
+//        Log.d(TAG, "initAttrs: " + mDeson);
     }
 
     /**
