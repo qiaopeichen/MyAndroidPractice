@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--选中 深绿色图片-->
+    <item android:drawable="@drawable/main_clean_icon_pressed" android:state_pressed="true" />
+    <!--未选中 浅绿色图片-->
+    <item android:drawable="@drawable/main_clean_icon" />
+</selector>

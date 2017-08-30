@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +24,6 @@ import com.itheima.mobilesafe74.R;
 import com.itheima.mobilesafe74.utils.ToastUtil;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;

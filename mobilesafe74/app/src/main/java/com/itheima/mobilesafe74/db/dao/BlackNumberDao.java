@@ -121,7 +121,7 @@ public class BlackNumberDao {
     public int getCount() {
         SQLiteDatabase db = blackNumberOpenHelper.getWritableDatabase();
         int count = 0;
-        Cursor cursor = db.rawQuery("select count(*) from black number;", null);
+        Cursor cursor = db.rawQuery("select count(*) from blacknumber;", null);
         if (cursor.moveToNext()) {
             count = cursor.getInt(0);
         }
