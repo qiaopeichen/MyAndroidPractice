@@ -105,7 +105,9 @@
         <service
             android:name=".service.BlackNumberService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".activity.AppManagerActivity"></activity>
     </application>
 
 </manifest>

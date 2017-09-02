@@ -79,7 +79,7 @@ public class BlackNumberService extends Service {
                 //5.调用在aidl中隐藏的endCall方法
                 iTelephony.endCall();
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }
@@ -110,7 +110,7 @@ public class BlackNumberService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return null;
     }
 
     @Override
