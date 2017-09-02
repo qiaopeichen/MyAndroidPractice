@@ -81,7 +81,31 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.BaseSetupActivity"></activity>
+        <activity android:name=".activity.BaseSetupActivity" />
+
+        <receiver
+            android:name=".receiver.SmsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+
+                <!-- 为了去关联系统短信的广播对应过滤条件 -->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.BlackNumberService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

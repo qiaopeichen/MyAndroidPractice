@@ -1,14 +1,12 @@
 package com.itheima.mobilesafe74.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.itheima.mobilesafe74.R;
 
 
-public class Setup1Activity extends AppCompatActivity {
+public class Setup1Activity extends BaseSetupActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +14,13 @@ public class Setup1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_setup1);
     }
 
-    public void nextPage(View view) {
+    @Override
+    protected void showPrePage() {
+        //空实现
+    }
+
+    @Override
+    protected void showNextPage() {
         Intent intent = new Intent(getApplicationContext(), Setup2Activity.class);
         startActivity(intent);
         finish();

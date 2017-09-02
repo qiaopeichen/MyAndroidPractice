@@ -18,7 +18,7 @@ import com.itheima.mobilesafe74.utils.ToastUtil;
 import com.itheima.mobilesafe74.view.SettingItemView;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
-public class Setup2Activity extends AppCompatActivity {
+public class Setup2Activity extends BaseSetupActivity {
 
 
 
@@ -29,6 +29,26 @@ public class Setup2Activity extends AppCompatActivity {
         initUI();
     }
 
+    @Override
+    protected void showPrePage() {
+        Intent intent = new Intent(getApplicationContext(), Setup1Activity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
+    }
+
+    @Override
+    protected void showNextPage() {
+        String serialNumber = SpUtil.getString(this, ConstantValue.SIM_NUMBER, "");
+        if (!TextUtils.isEmpty(serialNumber)) {
+            Intent intent = new Intent(getApplicationContext(), Setup3Activity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
+        } else {
+            ToastUtil.show(this, "请绑定sim卡");
+        }
+    }
 
 
     private void initUI() {
@@ -78,24 +98,4 @@ public class Setup2Activity extends AppCompatActivity {
 
         });
     }
-
-    public void nextPage(View v) {
-        String serialNumber = SpUtil.getString(this, ConstantValue.SIM_NUMBER, "");
-        if (!TextUtils.isEmpty(serialNumber)) {
-            Intent intent = new Intent(getApplicationContext(), Setup3Activity.class);
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.next_in_anim, R.anim.next_out_anim);
-        } else {
-            ToastUtil.show(this, "请绑定sim卡");
-        }
-    }
-
-    public void prePage(View v) {
-        Intent intent = new Intent(getApplicationContext(), Setup1Activity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.pre_in_anim, R.anim.pre_out_anim);
-    }
-
 }

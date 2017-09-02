@@ -21,6 +21,7 @@ public class SettingItemView extends RelativeLayout {
     private String mDeson;
     private CheckBox cb_box;
     private TextView tv_dex;
+    private TextView tv_title;
 
     public SettingItemView(Context context) {
         this(context, null);
@@ -39,7 +40,7 @@ public class SettingItemView extends RelativeLayout {
         * this.addView(view);
         * */
         // 自定义组合控件中的标题描述
-        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title = (TextView) findViewById(R.id.tv_title);
         tv_dex = (TextView) findViewById(R.id.tv_des);
         cb_box = (CheckBox) findViewById(R.id.cb_box);
         // 获取自定义以及原生属性的操作，写在此处，AttributeSet attrs对象中获取
@@ -66,7 +67,7 @@ public class SettingItemView extends RelativeLayout {
         mDestitle = attrs.getAttributeValue(NAMESPACE, "destitle");
         mDesoff = attrs.getAttributeValue(NAMESPACE, "desoff");
         mDeson = attrs.getAttributeValue(NAMESPACE, "deson");
-
+        tv_title.setText(mDestitle);
 //        Log.d(TAG, "initAttrs: " + mDestitle);
 //        Log.d(TAG, "initAttrs: " + mDesoff);
 //        Log.d(TAG, "initAttrs: " + mDeson);

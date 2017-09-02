@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.itheima.mobilesafe74.R;
 import com.itheima.mobilesafe74.service.AddressService;
+import com.itheima.mobilesafe74.service.BlackNumberService;
 import com.itheima.mobilesafe74.utils.ConstantValue;
 import com.itheima.mobilesafe74.utils.ServiceUtil;
 import com.itheima.mobilesafe74.utils.SpUtil;
@@ -35,6 +36,7 @@ public class SettingActivity extends AppCompatActivity {
         initUpdate();
         initToastStyle();
         initAddress();
+        initBlacknumber();
         rxPermissions
                 .request(Manifest.permission.READ_PHONE_STATE)
                 .subscribe(granted -> {
@@ -46,6 +48,29 @@ public class SettingActivity extends AppCompatActivity {
                         ToastUtil.show(getApplicationContext(), "请开启相应权限");
                     }
                 });
+    }
+
+    /**
+     * 拦截黑名单短信电话
+     */
+    private void initBlacknumber() {
+        SettingItemView siv_blacknumber = (SettingItemView) findViewById(R.id.siv_blacknumber);
+        boolean isRunning = ServiceUtil.isRunning(this, "com.itheima.mobilesafe74.service.BlackNumberService");
+        siv_blacknumber.setCheck(isRunning);
+        siv_blacknumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isCheck = siv_blacknumber.isCheck();
+                siv_blacknumber.setCheck(!isCheck);
+                if (!isCheck) {
+                    //开启服务
+                    startService(new Intent(getApplicationContext(), BlackNumberService.class));
+                } else {
+                    //关闭服务
+                    stopService(new Intent(getApplicationContext(), BlackNumberService.class));
+                }
+            }
+        });
     }
 
     /**
