@@ -107,7 +107,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.AppManagerActivity"></activity>
+        <activity android:name=".activity.AppManagerActivity" />
+        <activity android:name=".activity.CacheClearActivity" />
+        <activity android:name=".activity.SDCacheClearActivity"></activity>
     </application>
 
 </manifest>
