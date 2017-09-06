@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.itheima.mobilesafe74">
-
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- //获取准确GPS坐标的权限 -->
@@ -115,7 +116,18 @@
         <activity android:name=".activity.AppManagerActivity" />
         <activity android:name=".activity.CacheClearActivity" />
         <activity android:name=".activity.SDCacheClearActivity" />
-        <activity android:name=".activity.CommonNumberQueryActivity"></activity>
+        <activity android:name=".activity.CommonNumberQueryActivity" />
+        <activity android:name=".activity.AppLockActivity" />
+
+        <service
+            android:name=".service.WatchDogService"
+            android:enabled="true"
+            android:exported="true" />
+        <!--拦截界面要在一个单独的任务栈中-->
+        <!--不需要去显示手机卫士的图标，true不要显示最近的图标，false显示最近开启应用的图标-->
+        <activity android:name=".activity.EnterPsdActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"/>
     </application>
 
 </manifest>

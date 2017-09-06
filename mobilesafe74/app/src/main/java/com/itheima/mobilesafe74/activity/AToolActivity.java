@@ -34,6 +34,18 @@ public class AToolActivity extends AppCompatActivity {
         initSmsBackUp();
         // 常用号码查询
         initCommonNumberQuery();
+        // 程序锁
+        initAppLock();
+    }
+
+    private void initAppLock() {
+        TextView tv_app_lock = (TextView) findViewById(R.id.tv_app_lock);
+        tv_app_lock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AppLockActivity.class));
+            }
+        });
     }
 
     private void initCommonNumberQuery() {

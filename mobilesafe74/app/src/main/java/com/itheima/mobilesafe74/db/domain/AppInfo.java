@@ -10,7 +10,7 @@ public class AppInfo {
 
     // 名称，包名，图标，（内存，sd卡），（系统，用户）
     public String name;
-    public String packName;
+    public String packagename;
     public Drawable icon;
     public boolean isSdCard;
     public boolean isSystem;
@@ -24,11 +24,11 @@ public class AppInfo {
     }
 
     public String getPackageName() {
-        return packName;
+        return packagename;
     }
 
-    public void setPackName(String packName) {
-        this.packName = packName;
+    public void setPackagename(String packagename) {
+        this.packagename = packagename;
     }
 
     public Drawable getIcon() {

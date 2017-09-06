@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 
 import com.itheima.mobilesafe74.db.domain.AppInfo;
 
@@ -30,7 +29,7 @@ public class AppInfoProvider {
         for (PackageInfo packageInfo : packageInfoList) {
             AppInfo appInfo = new AppInfo();
             // 4.获取应用的包名
-            appInfo.packName = packageInfo.packageName;
+            appInfo.packagename = packageInfo.packageName;
             // 5.应用名称
             ApplicationInfo applicationInfo = packageInfo.applicationInfo;
             appInfo.name = applicationInfo.loadLabel(pm).toString();

@@ -3,6 +3,8 @@ package com.itheima.mobilesafe74.activity;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +12,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.itheima.mobilesafe74.R;
+import com.itheima.mobilesafe74.engine.ProcessManagerEngine;
 import com.itheima.mobilesafe74.service.AddressService;
 import com.itheima.mobilesafe74.service.BlackNumberService;
+import com.itheima.mobilesafe74.service.WatchDogService;
 import com.itheima.mobilesafe74.utils.ConstantValue;
 import com.itheima.mobilesafe74.utils.ServiceUtil;
 import com.itheima.mobilesafe74.utils.SpUtil;
@@ -37,6 +41,7 @@ public class SettingActivity extends AppCompatActivity {
         initToastStyle();
         initAddress();
         initBlacknumber();
+        initAppLock();
         rxPermissions
                 .request(Manifest.permission.READ_PHONE_STATE)
                 .subscribe(granted -> {
@@ -48,6 +53,30 @@ public class SettingActivity extends AppCompatActivity {
                         ToastUtil.show(getApplicationContext(), "请开启相应权限");
                     }
                 });
+    }
+    // 初始化程序锁的方法
+    private void initAppLock() {
+        final SettingItemView siv_app_lock = (SettingItemView) findViewById(R.id.siv_app_lock);
+        boolean isRunning = ServiceUtil.isRunning(this, "com.itheima.mobilesafe74.service.WatchDogService");
+        siv_app_lock.setCheck(isRunning);
+        siv_app_lock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isCheck = siv_app_lock.isCheck();
+                siv_app_lock.setCheck(!isCheck);
+                if (!isCheck) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                            !ProcessManagerEngine.hasGetUsageStatsPermission(SettingActivity.this)) {
+                        ProcessManagerEngine.requestUsageStatesPermission(SettingActivity.this);
+                    }
+                    // 开启服务
+                    startService(new Intent(getApplicationContext(), WatchDogService.class));
+                } else {
+                    // 关闭服务
+                    stopService(new Intent(getApplicationContext(), WatchDogService.class));
+                }
+            }
+        });
     }
 
     /**
