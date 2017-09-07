@@ -112,9 +112,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initDB() {
-        //1.归属地数据拷贝过程
+        // 1.归属地数据拷贝过程
         initAddressDB("address.db");
+        // 2.常用号码数据库拷贝
         initAddressDB("commonnum.db");
+        // 3.拷贝病毒数据
+        initAddressDB("antivirus.db");
     }
 
     /**
