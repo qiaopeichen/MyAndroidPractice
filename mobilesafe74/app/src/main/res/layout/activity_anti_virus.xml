@@ -36,7 +36,7 @@
                 android:text="正在扫描应用"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <!--自定义进度条图片（三种类型）-->
+            <!--自定义进度条图片（三种类型） -->
             <ProgressBar
                 android:id="@+id/pb_bar"
                 android:progressDrawable="@drawable/progress_bg"
