@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.itheima.mobilesafe74">
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- //获取准确GPS坐标的权限 -->
@@ -28,6 +31,10 @@
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
         android:name=".global.MyApplication"
@@ -123,11 +130,18 @@
             android:name=".service.WatchDogService"
             android:enabled="true"
             android:exported="true" />
-        <!--拦截界面要在一个单独的任务栈中-->
-        <!--不需要去显示手机卫士的图标，true不要显示最近的图标，false显示最近开启应用的图标-->
-        <activity android:name=".activity.EnterPsdActivity"
+        <!-- 拦截界面要在一个单独的任务栈中 -->
+        <!-- 不需要去显示手机卫士的图标，true不要显示最近的图标，false显示最近开启应用的图标 -->
+        <activity
+            android:name=".activity.EnterPsdActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance" />
+        <activity android:name=".activity.ProcessSettingActivity" />
+
+        <service
+            android:name=".service.LockScreenService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

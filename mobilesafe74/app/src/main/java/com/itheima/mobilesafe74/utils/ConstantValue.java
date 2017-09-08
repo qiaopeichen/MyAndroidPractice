@@ -49,5 +49,6 @@ public class ConstantValue {
      * 来电显示吐司颜色Key
      */
     public static final String TOAST_STYLE = "toast_style";
+    public static final String SHOW_SYSTEM = "show_system";
 }
 
