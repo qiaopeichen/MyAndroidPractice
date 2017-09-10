@@ -162,15 +162,15 @@ public class ProcessInfoProvider {
                         Log.i(TAG, "top running app is : " + processName);
                         PackageManager PM = context.getPackageManager();
                         ProcessInfo processInfo=new ProcessInfo();
-//                        int uidForName = Process.getUidForName(processName);
+                        int uidForName = android.os.Process.getUidForName(processName);
                         /***
                          * 此方法未能成功获取进程的内存信息
                          */
-//                        Debug.MemoryInfo[] processMemoryInfo = systemService.getProcessMemoryInfo(new int[]{uidForName});
+                        Debug.MemoryInfo[] processMemoryInfo = systemService.getProcessMemoryInfo(new int[]{uidForName});
                         //获取已使用的大小：
-//                        processInfo.memSize= processMemoryInfo[0].getTotalPrivateDirty()*1024;
+                        processInfo.memSize= processMemoryInfo[0].getTotalPrivateDirty()*1024;
                         processInfo.packageName= processName;
-                        //processInfo.appPid=uidForName;
+//                        processInfo.appPid=uidForName;
                         //获取应用的名称
                         try {
                             ApplicationInfo applicationInfo = PM.getApplicationInfo(processInfo.getPackageName(), 0);
@@ -216,17 +216,14 @@ public class ProcessInfoProvider {
      * @param ctx
      */
     public static void killAll(Context ctx) {
-        // 1.获取ActivityManager
-        ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
-        // 2.获取正在运行进程的集合
-        List<RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
-        // 3.循环遍历所有的进程，并且杀死
-        for (RunningAppProcessInfo info : runningAppProcesses) {
+        List<ProcessInfo> processInfo = getProcessInfo(ctx);
+        for (ProcessInfo info : processInfo) {
             // 4.除了手机卫士以外，其他的进程都需要去杀死
-            if (info.processName.equals(ctx.getPackageName())) {
+            if (info.packageName.equals(ctx.getPackageName())) {
                 continue;
             }
-            am.killBackgroundProcesses(info.processName);
+            ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+            am.killBackgroundProcesses(info.packageName);
         }
     }
 }

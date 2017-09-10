@@ -67,7 +67,8 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ProgressManagerActivity.class));
                         break;
                     case 4:
-                        startActivity(new Intent(getApplicationContext(), TrafficActivity.class));
+                        ToastUtil.show(getApplicationContext(), "暂未实现");
+//                        startActivity(new Intent(getApplicationContext(), TrafficActivity.class));
                         break;
                     case 5:
                         startActivity(new Intent(getApplicationContext(), AntiVirusActivity.class));
@@ -218,7 +219,11 @@ public class HomeActivity extends AppCompatActivity {
             View view = View.inflate(getApplicationContext(), R.layout.gridview_item_home, null);
             ImageView iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
             iv_icon.setBackgroundResource(mDrawableIds[position]);
-
+            ViewGroup.LayoutParams para;
+            para = iv_icon.getLayoutParams();
+            para.height = 120;
+            para.width = 120;
+            iv_icon.setLayoutParams(para);
             TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
             tv_title.setText(mDes[position]);
             // 返回view，代表此view需要去做展示

@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
     <style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:background">#FFF</item>
@@ -15,7 +18,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#fff</item>
         <item name="android:padding">10dp</item>
-        <item name="android:background">@android:color/holo_blue_light</item>
+        <item name="android:background">#D6D6D7</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
